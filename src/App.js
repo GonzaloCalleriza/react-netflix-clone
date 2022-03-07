@@ -9,8 +9,10 @@ function App() {
   const [genres, setGenres] = useState(null);
   
   const fetchData = async () => {
-    const url = "/.netlify/functions/getGenres"
-    const response = await fetch(url)
+    
+    const response = await fetch("/.netlify/functions/getGenres", {
+      method: "POST",
+    })
 
     const responseBody = await response.json()
 
@@ -23,8 +25,8 @@ function App() {
 
   return (
     <div >
-      {genres &&  genres.map((genre) => (
-        <Section genre={genre} key={genre._id}/>       
+      {Object.values(genres).map((genre, index) => (
+            <Section key={index} genre={genre.value} />
       ))}
       
     </div>
